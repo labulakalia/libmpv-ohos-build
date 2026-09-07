@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eu
+set -exu
 arch=$1
 # ffmpeg
 ARCH=${arch} ./scripts/mbedtls.sh build

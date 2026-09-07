@@ -1,8 +1,8 @@
 #!/bin/bash
 
-set -eu
+set -exu
 
-./download.sh amd64
+sh -x ./download.sh amd64
 ./patch.sh
 
 mkdir -p ./libmpv/amd64-build

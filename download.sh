@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eu
+set -exu
 
 mkdir -p ./libmpv/$1-build
 ./download/download-sdk.sh

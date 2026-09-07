@@ -3,7 +3,7 @@
 set -exu
 
 mkdir -p ./libmpv/$1-build
-./download/download-sdk.sh
+sh -x ./download/download-sdk.sh
 # if [ "$(uname -s)" = "Linux" ]; then
 #   if [ ! -d /sdk ]; then
 #     echo "Downloading OpenHarmony SDK..."
@@ -18,5 +18,5 @@ mkdir -p ./libmpv/$1-build
 #   exit 1
 # fi
 
-./download/download-ohos-rs.sh
-./download/download-deps.sh
+sh -x ./download/download-ohos-rs.sh
+sh -x ./download/download-deps.sh

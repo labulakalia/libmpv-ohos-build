@@ -4,7 +4,7 @@ set -eu
 
 ROOT_DIR=$(cd $(dirname "$0")/..; pwd)
 
-. $ROOT_DIR/env.sh
+. $ROOT_DIR/env.sh ${ARCH}
 
 pushd $ROOT_DIR/libmpv/ffmpeg
 
@@ -16,11 +16,17 @@ elif [ "$1" == "clean" ]; then
 else
 	exit 1
 fi
+buildArch=""
+if [[ ${ARCH} == "amd64" ]];then
+    buildArch="x86_64"
+else
+    buildArch="aarch64"
+fi
 
 ./configure \
   --prefix=$DEST \
-  --arch=aarch64 \
-  --cpu=armv8-a \
+  --arch=${buildArch} \
+  \ # --cpu=armv8-a \
   --target-os=linux \
   --enable-static \
   --disable-shared \

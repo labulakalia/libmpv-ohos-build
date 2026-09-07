@@ -4,7 +4,7 @@ set -eu
 
 ROOT_DIR=$(cd $(dirname "$0")/..; pwd)
 
-. $ROOT_DIR/env.sh
+. $ROOT_DIR/env.sh ${ARCH}
 
 pushd $ROOT_DIR/libmpv/mbedtls
 

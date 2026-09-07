@@ -4,7 +4,7 @@ set -eu
 
 ROOT_DIR=$(cd $(dirname "$0")/..; pwd)
 
-. $ROOT_DIR/env.sh
+. $ROOT_DIR/env.sh ${ARCH}
 
 pushd $ROOT_DIR/libmpv/mpv
 
@@ -21,7 +21,7 @@ mkdir -p .build
 cd .build
 
 meson setup .. \
-  --cross-file $ROOT_DIR/libmpv/arm64-crossfile.ini \
+  --cross-file $ROOT_DIR/libmpv/crossfile.ini \
   --prefix=$DEST/mpv \
   --default-library shared \
   --strip \

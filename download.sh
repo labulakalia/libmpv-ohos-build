@@ -2,7 +2,7 @@
 
 set -eu
 
-mkdir -p ./libmpv/${arch}-build
+mkdir -p ./libmpv/$1-build
 ./download/download-sdk.sh
 # if [ "$(uname -s)" = "Linux" ]; then
 #   if [ ! -d /sdk ]; then

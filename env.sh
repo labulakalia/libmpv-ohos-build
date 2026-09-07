@@ -14,7 +14,7 @@ elif [ "$(uname -s)" = "Darwin" ]; then
   export CORES=$(sysctl -n hw.ncpu)
 fi
 
-export DEST=$ROOT_DIR/libmpv/arm64-build
+export DEST=$ROOT_DIR/libmpv/${arch}-build
 export PATH=$OHOS_NDK_HOME/native/build-tools/cmake/bin:$PATH
 export PKG_CONFIG_PATH=$DEST/lib/pkgconfig
 export PKG_CONFIG_LIBDIR=$OHOS_NDK_HOME/native/sysroot/usr/lib

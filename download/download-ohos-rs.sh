@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eu
+set -eux
 
 if command -v rustup &> /dev/null; then
   echo "rustup is already installed"

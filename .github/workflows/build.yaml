@@ -33,7 +33,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt install -y gperf
+          sudo apt install -y gperf nasm
           pip3 install meson
         shell: bash
 

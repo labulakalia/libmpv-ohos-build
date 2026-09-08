@@ -6,7 +6,9 @@ ROOT_DIR=$(cd $(dirname "$0")/..; pwd)
 
 . $ROOT_DIR/env.sh ${ARCH}
 
-pushd $ROOT_DIR/libmpv/dav1d
+rm -rf $ROOT_DIR/libmpv/dav1d_build
+cp -rf $ROOT_DIR/libmpv/dav1d $ROOT_DIR/libmpv/dav1d_build
+pushd $ROOT_DIR/libmpv/dav1d_build
 
 if [ "$1" == "build" ]; then
 	echo -e "\nBuilding dav1d..."
@@ -19,6 +21,7 @@ fi
 
 mkdir -p .build
 cd .build
+
 
 meson setup .. \
   --cross-file $ROOT_DIR/libmpv/crossfile.ini \

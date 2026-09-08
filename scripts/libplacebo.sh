@@ -5,8 +5,9 @@ set -eu
 ROOT_DIR=$(cd $(dirname "$0")/..; pwd)
 
 . $ROOT_DIR/env.sh ${ARCH}
-
-pushd $ROOT_DIR/libmpv/libplacebo
+rm -rf $ROOT_DIR/libmpv/libplacebo_build
+cp -rf $ROOT_DIR/libmpv/libplacebo $ROOT_DIR/libmpv/libplacebo_build
+pushd $ROOT_DIR/libmpv/libplacebo_build
 
 if [ "$1" == "build" ]; then
 	echo -e "\nBuilding libplacebo..."

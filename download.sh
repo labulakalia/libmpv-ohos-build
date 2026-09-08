@@ -2,7 +2,6 @@
 
 set -exu
 
-mkdir -p ./libmpv/$1-build
 sh -x ./download/download-sdk.sh
 # if [ "$(uname -s)" = "Linux" ]; then
 #   if [ ! -d /sdk ]; then

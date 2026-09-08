@@ -6,7 +6,9 @@ ROOT_DIR=$(cd $(dirname "$0")/..; pwd)
 
 . $ROOT_DIR/env.sh ${ARCH}
 
-pushd $ROOT_DIR/libmpv/libxml2
+rm -rf $ROOT_DIR/libmpv/libxml2_build
+cp -rf $ROOT_DIR/libmpv/libxml2 $ROOT_DIR/libmpv/libxml2_build
+pushd $ROOT_DIR/libmpv/libxml2_build
 
 if [ "$1" == "build" ]; then
 	echo -e "\nBuilding libxml2..."

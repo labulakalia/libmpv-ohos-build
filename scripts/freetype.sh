@@ -5,8 +5,9 @@ set -eu
 ROOT_DIR=$(cd $(dirname "$0")/..; pwd)
 
 . $ROOT_DIR/env.sh ${ARCH}
-
-pushd $ROOT_DIR/libmpv/freetype
+rm -rf $ROOT_DIR/libmpv/freetype_build
+cp -rf $ROOT_DIR/libmpv/freetype $ROOT_DIR/libmpv/freetype_build
+pushd $ROOT_DIR/libmpv/freetype_build
 
 if [ "$1" == "build" ]; then
 	echo -e "\nBuilding freetype..."

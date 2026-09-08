@@ -6,7 +6,10 @@ ROOT_DIR=$(cd $(dirname "$0")/..; pwd)
 
 . $ROOT_DIR/env.sh ${ARCH}
 
-pushd $ROOT_DIR/libmpv/fribidi
+
+rm -rf $ROOT_DIR/libmpv/fribidi_build
+cp -rf $ROOT_DIR/libmpv/fribidi $ROOT_DIR/libmpv/fribidi_build
+pushd $ROOT_DIR/libmpv/fribidi_build
 
 if [ "$1" == "build" ]; then
 	echo -e "\nBuilding fribidi..."

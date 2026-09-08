@@ -6,7 +6,9 @@ ROOT_DIR=$(cd $(dirname "$0")/..; pwd)
 
 . $ROOT_DIR/env.sh ${ARCH}
 
-pushd $ROOT_DIR/libmpv/fontconfig
+rm -rf $ROOT_DIR/libmpv/fontconfig_build
+cp -rf $ROOT_DIR/libmpv/fontconfig $ROOT_DIR/libmpv/fontconfig_build
+pushd $ROOT_DIR/libmpv/fontconfig_build
 
 if [ "$1" == "build" ]; then
 	echo -e "\nBuilding fontconfig..."

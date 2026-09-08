@@ -6,7 +6,9 @@ ROOT_DIR=$(cd $(dirname "$0")/..; pwd)
 
 . $ROOT_DIR/env.sh ${ARCH}
 
-pushd $ROOT_DIR/libmpv/lcms
+rm -rf $ROOT_DIR/libmpv/lcms_build
+cp -rf $ROOT_DIR/libmpv/lcms $ROOT_DIR/libmpv/lcms_build
+pushd $ROOT_DIR/libmpv/lcms_build
 
 if [ "$1" == "build" ]; then
 	echo -e "\nBuilding lcms..."

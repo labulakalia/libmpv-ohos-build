@@ -6,7 +6,9 @@ ROOT_DIR=$(cd $(dirname "$0")/..; pwd)
 
 . $ROOT_DIR/env.sh ${ARCH}
 
-pushd $ROOT_DIR/libmpv/ffmpeg
+rm -rf $ROOT_DIR/libmpv/ffmpeg_build
+cp -rf $ROOT_DIR/libmpv/ffmpeg $ROOT_DIR/libmpv/ffmpeg_build
+pushd $ROOT_DIR/libmpv/ffmpeg_build
 
 if [ "$1" == "build" ]; then
 	echo -e "\nBuilding FFmpeg..."
@@ -26,7 +28,6 @@ fi
 ./configure \
   --prefix=$DEST \
   --arch=${buildArch} \
-  \ # --cpu=armv8-a \
   --target-os=linux \
   --enable-static \
   --disable-shared \
@@ -51,5 +52,4 @@ fi
   --enable-encoder=png,mjpeg
 make -j$CORES
 make install
-
 popd

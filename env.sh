@@ -1,8 +1,8 @@
 #!/bin/bash
 
-set -eu
+set -eux
 
-arch=$1
+arch=${ARCH}
 
 ROOT_DIR=$(cd $(dirname "$0")/..; pwd)
 

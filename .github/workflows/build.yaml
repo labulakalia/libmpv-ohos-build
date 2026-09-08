@@ -49,6 +49,7 @@ jobs:
           name: artifact
           path: |
             ./libmpv/arm64-build/*.zip
+            ./libmpv/amd64-build/*.zip
 
       - name: Prepare release
         if: ${{ github.event.inputs.release == 'true' }}
@@ -66,3 +67,4 @@ jobs:
             **Workflow run**: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           files: |
             ./libmpv/arm64-build/*.zip
+            ./libmpv/amd64-build/*.zip

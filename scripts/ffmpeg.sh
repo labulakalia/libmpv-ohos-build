@@ -4,9 +4,11 @@ set -eu
 
 ROOT_DIR=$(cd $(dirname "$0")/..; pwd)
 
-. $ROOT_DIR/env.sh
+. $ROOT_DIR/env.sh ${ARCH}
 
-pushd $ROOT_DIR/libmpv/ffmpeg
+rm -rf $ROOT_DIR/libmpv/ffmpeg_build
+cp -rf $ROOT_DIR/libmpv/ffmpeg $ROOT_DIR/libmpv/ffmpeg_build
+pushd $ROOT_DIR/libmpv/ffmpeg_build
 
 if [ "$1" == "build" ]; then
 	echo -e "\nBuilding FFmpeg..."
@@ -16,11 +18,16 @@ elif [ "$1" == "clean" ]; then
 else
 	exit 1
 fi
+buildArch=""
+if [[ ${ARCH} == "amd64" ]];then
+    buildArch="x86_64"
+else
+    buildArch="aarch64"
+fi
 
 ./configure \
   --prefix=$DEST \
-  --arch=aarch64 \
-  --cpu=armv8-a \
+  --arch=${buildArch} \
   --target-os=linux \
   --enable-static \
   --disable-shared \
@@ -45,5 +52,4 @@ fi
   --enable-encoder=png,mjpeg
 make -j$CORES
 make install
-
 popd

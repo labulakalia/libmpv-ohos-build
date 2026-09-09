@@ -4,9 +4,11 @@ set -eu
 
 ROOT_DIR=$(cd $(dirname "$0")/..; pwd)
 
-. $ROOT_DIR/env.sh
+. $ROOT_DIR/env.sh ${ARCH}
 
-pushd $ROOT_DIR/libmpv/lua
+rm -rf $ROOT_DIR/libmpv/lua_build
+cp -rf $ROOT_DIR/libmpv/lua $ROOT_DIR/libmpv/lua_build
+pushd $ROOT_DIR/libmpv/lua_build
 
 if [ "$1" == "build" ]; then
 	echo -e "\nBuilding lua..."

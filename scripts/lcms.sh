@@ -4,9 +4,11 @@ set -eu
 
 ROOT_DIR=$(cd $(dirname "$0")/..; pwd)
 
-. $ROOT_DIR/env.sh
+. $ROOT_DIR/env.sh ${ARCH}
 
-pushd $ROOT_DIR/libmpv/lcms
+rm -rf $ROOT_DIR/libmpv/lcms_build
+cp -rf $ROOT_DIR/libmpv/lcms $ROOT_DIR/libmpv/lcms_build
+pushd $ROOT_DIR/libmpv/lcms_build
 
 if [ "$1" == "build" ]; then
 	echo -e "\nBuilding lcms..."
@@ -21,7 +23,7 @@ mkdir -p .build
 cd .build
 
 meson setup .. \
-  --cross-file $ROOT_DIR/libmpv/arm64-crossfile.ini \
+  --cross-file $ROOT_DIR/libmpv/crossfile.ini \
   --prefix=$DEST \
   -Dtests=disabled
 ninja -j$CORES

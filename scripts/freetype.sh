@@ -4,9 +4,10 @@ set -eu
 
 ROOT_DIR=$(cd $(dirname "$0")/..; pwd)
 
-. $ROOT_DIR/env.sh
-
-pushd $ROOT_DIR/libmpv/freetype
+. $ROOT_DIR/env.sh ${ARCH}
+rm -rf $ROOT_DIR/libmpv/freetype_build
+cp -rf $ROOT_DIR/libmpv/freetype $ROOT_DIR/libmpv/freetype_build
+pushd $ROOT_DIR/libmpv/freetype_build
 
 if [ "$1" == "build" ]; then
 	echo -e "\nBuilding freetype..."
@@ -21,7 +22,7 @@ mkdir -p .build
 cd .build
 
 meson setup .. \
-  --cross-file $ROOT_DIR/libmpv/arm64-crossfile.ini \
+  --cross-file $ROOT_DIR/libmpv/crossfile.ini \
   --prefix=$DEST
 ninja -j$CORES
 ninja install

@@ -4,9 +4,12 @@ set -eu
 
 ROOT_DIR=$(cd $(dirname "$0")/..; pwd)
 
-. $ROOT_DIR/env.sh
+. $ROOT_DIR/env.sh ${ARCH}
 
-pushd $ROOT_DIR/libmpv/dovi_tools/dolby_vision
+rm -rf $ROOT_DIR/libmpv/dovi_tools_build
+
+cp -rf $ROOT_DIR/libmpv/dovi_tools $ROOT_DIR/libmpv/dovi_tools_build
+pushd $ROOT_DIR/libmpv/dovi_tools_build/dolby_vision
 
 if [ "$1" == "build" ]; then
 	echo -e "\nBuilding dovi tools..."
@@ -17,9 +20,15 @@ else
 	exit 1
 fi
 
+if [[ ${ARCH} == "arm64" ]]; then
+  export TARGET=aarch64-unknown-linux-ohos
+else
+  export TARGET=x86_64-unknown-linux-ohos
+fi
+
 cargo cinstall \
   --release \
-  --target=aarch64-unknown-linux-ohos \
+  --target=${TARGET} \
   --library-type=staticlib \
   --prefix=$DEST \
   --libdir=lib

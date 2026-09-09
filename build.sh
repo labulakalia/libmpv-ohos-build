@@ -1,10 +1,10 @@
 #!/bin/bash
 
-set -eu
-
+set -exu
 # ffmpeg
 ./scripts/mbedtls.sh build
 ./scripts/dav1d.sh build
+
 ./scripts/ffmpeg.sh build
 
 # fontconfig

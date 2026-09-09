@@ -1,6 +1,8 @@
 #!/bin/bash
 
-set -eu
+set -eux
+
+arch=${ARCH}
 
 ROOT_DIR=$(cd $(dirname "$0")/..; pwd)
 
@@ -12,15 +14,21 @@ elif [ "$(uname -s)" = "Darwin" ]; then
   export CORES=$(sysctl -n hw.ncpu)
 fi
 
-export DEST=$ROOT_DIR/libmpv/arm64-build
+export DEST=$ROOT_DIR/libmpv/${arch}-build
 export PATH=$OHOS_NDK_HOME/native/build-tools/cmake/bin:$PATH
 export PKG_CONFIG_PATH=$DEST/lib/pkgconfig
 export PKG_CONFIG_LIBDIR=$OHOS_NDK_HOME/native/sysroot/usr/lib
 export PKG_CONFIG_INCLUDEDIR=$OHOS_NDK_HOME/native/sysroot/usr/include
+buildArch=""
+if [[ $arch == "amd64" ]];then
+    buildArch="x86_64"
+else
+    buildArch="aarch64"
+fi
 
 export AS=$OHOS_NDK_HOME/native/llvm/bin/llvm-as
-export CC="$OHOS_NDK_HOME/native/llvm/bin/clang --target=aarch64-linux-ohos --sysroot=$OHOS_NDK_HOME/native/sysroot"
-export CXX="$OHOS_NDK_HOME/native/llvm/bin/clang++ --target=aarch64-linux-ohos --sysroot=$OHOS_NDK_HOME/native/sysroot"
+export CC="$OHOS_NDK_HOME/native/llvm/bin/clang --target=${buildArch}-linux-ohos --sysroot=$OHOS_NDK_HOME/native/sysroot"
+export CXX="$OHOS_NDK_HOME/native/llvm/bin/clang++ --target=${buildArch}-linux-ohos --sysroot=$OHOS_NDK_HOME/native/sysroot"
 export LD=$OHOS_NDK_HOME/native/llvm/bin/ld.lld
 export STRIP=$OHOS_NDK_HOME/native/llvm/bin/llvm-strip
 export RANLIB=$OHOS_NDK_HOME/native/llvm/bin/llvm-ranlib

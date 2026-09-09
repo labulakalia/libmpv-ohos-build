@@ -1,18 +1,19 @@
 #!/bin/bash
 
-set -eu
+set -eux
 
 ROOT_DIR=$(cd $(dirname "$0")/..; pwd)
 
 . $ROOT_DIR/download/deps-version.sh
 
+mkdir -p $ROOT_DIR/libmpv
 pushd $ROOT_DIR/libmpv
 
 # mbedtls
 if [ ! -d mbedtls ]; then
   echo "Downloading mbedtls..."
 	mkdir mbedtls
-	wget -qO mbedtls.tar.bz2 https://github.com/Mbed-TLS/mbedtls/releases/download/mbedtls-$V_MBEDTLS/mbedtls-$V_MBEDTLS.tar.bz2
+	wget -O mbedtls.tar.bz2 https://github.com/Mbed-TLS/mbedtls/releases/download/mbedtls-$V_MBEDTLS/mbedtls-$V_MBEDTLS.tar.bz2
   tar -C mbedtls --strip-components=1 -jxf mbedtls.tar.bz2
   rm mbedtls.tar.bz2
 else
@@ -22,7 +23,7 @@ fi
 # dav1d
 if [ ! -d dav1d ]; then
   echo "Downloading dav1d..."
-  git -c advice.detachedHead=false clone -q --depth 1 -b $V_DAV1D https://code.videolan.org/videolan/dav1d.git dav1d > /dev/null
+  git -c advice.detachedHead=false clone -q --depth 1 -b $V_DAV1D https://github.com/videolan/dav1d dav1d > /dev/null
 else
   echo "dav1d already exists, skipping."
 fi
@@ -30,7 +31,7 @@ fi
 # libxml2
 if [ ! -d libxml2 ]; then
   echo "Downloading libxml2..."
-  git -c advice.detachedHead=false clone -q --depth 1 -b $V_LIBXML2 --recursive https://gitlab.gnome.org/GNOME/libxml2.git libxml2 > /dev/null
+  git -c advice.detachedHead=false clone -q --depth 1 -b $V_LIBXML2 --recursive https://github.com/gnome/libxml2 libxml2 > /dev/null
 else
   echo "libxml2 already exists, skipping."
 fi
@@ -46,7 +47,7 @@ fi
 # freetype
 if [ ! -d freetype ]; then
   echo "Downloading freetype..."
-  git -c advice.detachedHead=false clone -q --depth 1 -b $V_FREETYPE https://gitlab.freedesktop.org/freetype/freetype.git freetype > /dev/null
+  git -c advice.detachedHead=false clone -q --depth 1 -b $V_FREETYPE https://github.com/freetype/freetype freetype > /dev/null
 else
   echo "freetype already exists, skipping."
 fi
@@ -62,7 +63,7 @@ fi
 # fontconfig
 if [ ! -d fontconfig ]; then
   echo "Downloading fontconfig..."
-  git -c advice.detachedHead=false clone -q --depth 1 -b $V_FONTCONFIG https://gitlab.freedesktop.org/fontconfig/fontconfig.git fontconfig > /dev/null
+  git -c advice.detachedHead=false clone -q --depth 1 -b $V_FONTCONFIG https://github.com/arthenica/fontconfig fontconfig > /dev/null
 else
   echo "fontconfig already exists, skipping."
 fi
@@ -113,7 +114,7 @@ fi
 # libplacebo
 if [ ! -d libplacebo ]; then
   echo "Downloading libplacebo..."
-  git -c advice.detachedHead=false clone -q --depth 1 -b $V_LIBPLACEBO --recursive https://code.videolan.org/videolan/libplacebo.git libplacebo > /dev/null
+  git -c advice.detachedHead=false clone -q --depth 1 -b $V_LIBPLACEBO --recursive https://github.com/haasn/libplacebo libplacebo > /dev/null
 else
   echo "libplacebo already exists, skipping."
 fi
